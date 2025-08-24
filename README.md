@@ -103,17 +103,12 @@ Create a `.env` file in the root directory with the following variables:
 ```env
 # Application
 NODE_ENV=development
-PORT=3000
-HOST=0.0.0.0
+PORT=9090
+HOST=localhost
 API_PREFIX=/api/v1
 
 # Database
 MONGODB_URI=mongodb://localhost:27017/company-data-managing
-
-# Authentication
-JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-JWT_EXPIRE=7d
-BCRYPT_ROUNDS=12
 
 # Rate Limiting
 RATE_LIMIT_WINDOW_MS=900000    # 15 minutes
