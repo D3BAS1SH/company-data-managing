@@ -390,6 +390,9 @@ app.get(
         res.status(200).json(new ApiResponse(200, 'API is running', apiInfo));
     })
 );
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Welcome to the Company Data Management API!' });
+});
 
 // TODO: Import and register route modules here
 // Example:
