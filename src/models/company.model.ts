@@ -8,7 +8,7 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
  */
 
 // Industry enum for validation
-const industryEnum = [
+export const industryEnum = [
     'Technology',
     'Healthcare',
     'Manufacturing',
@@ -31,7 +31,7 @@ interface ICompany {
     description?: string;
     industry: IndustryType;
     foundedYear?: number;
-    location: string;
+    location: string[];
     website?: string;
     email: string;
     phone?: string;
@@ -102,10 +102,14 @@ const companySchema = new Schema<ICompanyDocument>(
             },
         },
         location: {
-            type: String,
-            required: [true, 'Location is required'],
-            trim: true,
-            maxlength: [200, 'Location cannot exceed 200 characters'],
+            type: [String],
+            required: [true, 'At least one location is required'],
+            validate: {
+                validator: function (value: string[]) {
+                    return value.length > 0 && value.every(loc => loc.length <= 200);
+                },
+                message: 'Each location must not exceed 200 characters',
+            },
         },
         website: {
             type: String,
@@ -313,10 +317,12 @@ const Company = mongoose.model<ICompanyDocument, ICompanyModel>('Company', compa
  *           description: Year the company was founded
  *           example: 2010
  *         location:
- *           type: string
- *           maxLength: 200
- *           description: Company location
- *           example: "San Francisco, CA, USA"
+ *           type: array
+ *           items:
+ *             type: string
+ *             maxLength: 200
+ *           description: Company location(s)
+ *           example: ["San Francisco, CA, USA", "New York, NY, USA"]
  *         website:
  *           type: string
  *           description: Company website URL
@@ -375,7 +381,7 @@ const Company = mongoose.model<ICompanyDocument, ICompanyModel>('Company', compa
  *         description: "Leading provider of innovative technology solutions"
  *         industry: "Technology"
  *         foundedYear: 2010
- *         location: "San Francisco, CA, USA"
+ *         location: ["San Francisco, CA, USA", "New York, NY, USA"]
  *         website: "https://techsolutions.com"
  *         email: "contact@techsolutions.com"
  *         phone: "+1-555-123-4567"
