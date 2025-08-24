@@ -6,6 +6,7 @@
  */
 
 export { default as healthRoutes } from './health.routes';
+export { default as companyRoutes}from './company.routes';
 
 // Add more route exports as you create them:
 // export { default as authRoutes } from './auth.routes';
