@@ -247,7 +247,7 @@ app.use(
 
 // CORS: Cross-Origin Resource Sharing
 const corsOptions = {
-    origin:"all",
+    origin: ['http://localhost:3000', 'http://localhost:9090'],
     credentials: true,
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
