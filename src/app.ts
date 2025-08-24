@@ -399,6 +399,11 @@ app.get(
 import healthRoutes from './routes/health.routes';
 app.use(`${API_PREFIX}/health`, healthRoutes);
 
+import { companyRoutes } from './routes';
+
+// Register company routes
+app.use(`${API_PREFIX}/companies`, companyRoutes);
+
 /**
  * Error Handling Middleware
  *
