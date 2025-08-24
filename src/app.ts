@@ -247,10 +247,7 @@ app.use(
 
 // CORS: Cross-Origin Resource Sharing
 const corsOptions = {
-    origin:
-        process.env.NODE_ENV === 'production'
-            ? process.env.ALLOWED_ORIGINS?.split(',') || false
-            : true, // Allow all origins in development
+    origin:"all",
     credentials: true,
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

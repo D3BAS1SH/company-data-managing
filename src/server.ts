@@ -201,7 +201,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
  * before starting the server.
  */
 const validateEnvironment = (): void => {
-    const requiredEnvVars = ['MONGODB_URI', 'JWT_SECRET'];
+    const requiredEnvVars = ['MONGODB_URI'];
 
     const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
 

@@ -58,7 +58,6 @@ const swaggerDefinition = {
       ## Features
       - **Type-safe**: Built with TypeScript for better development experience
       - **Database**: MongoDB with Mongoose ODM for data persistence
-      - **Authentication**: JWT-based authentication and authorization
       - **Validation**: Request/response validation with detailed error messages
       - **Error Handling**: Comprehensive error handling with proper HTTP status codes
       - **Documentation**: Auto-generated API documentation with Swagger
@@ -72,7 +71,6 @@ const swaggerDefinition = {
       ## Rate Limiting
       API requests are rate limited to prevent abuse:
       - **General endpoints**: 100 requests per 15 minutes
-      - **Authentication endpoints**: 5 requests per 15 minutes
       
       ## Error Responses
       All error responses follow a consistent format:
@@ -101,8 +99,8 @@ const swaggerDefinition = {
         {
             url:
                 process.env.NODE_ENV === 'production'
-                    ? 'https://api.company.com'
-                    : `http://localhost:${process.env.PORT || 3000}`,
+                    ? 'https://api.company.com/api/v1'
+                    : `http://localhost:${process.env.PORT || 9090}/api/v1`,
             description:
                 process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server',
         },
@@ -114,12 +112,6 @@ const swaggerDefinition = {
                 scheme: 'bearer',
                 bearerFormat: 'JWT',
                 description: 'Enter your JWT token in the format: Bearer <token>',
-            },
-            apiKey: {
-                type: 'apiKey',
-                in: 'header',
-                name: 'X-API-Key',
-                description: 'API key for authentication',
             },
         },
         schemas: {
@@ -155,92 +147,13 @@ const swaggerDefinition = {
                 },
                 required: ['success', 'statusCode', 'message', 'timestamp'],
             },
-            // Error Response Schema
-            ErrorResponse: {
-                type: 'object',
-                properties: {
-                    success: {
-                        type: 'boolean',
-                        example: false,
-                    },
-                    statusCode: {
-                        type: 'integer',
-                        description: 'HTTP error status code',
-                    },
-                    message: {
-                        type: 'string',
-                        description: 'Error message',
-                    },
-                    errors: {
-                        type: 'array',
-                        items: {
-                            type: 'string',
-                        },
-                        description: 'Array of detailed error messages',
-                    },
-                    timestamp: {
-                        type: 'string',
-                        format: 'date-time',
-                    },
-                    path: {
-                        type: 'string',
-                        description: 'Request path that caused the error',
-                    },
-                },
-                required: ['success', 'statusCode', 'message', 'timestamp'],
-            },
-            // Pagination Schema
-            Pagination: {
-                type: 'object',
-                properties: {
-                    page: {
-                        type: 'integer',
-                        minimum: 1,
-                        description: 'Current page number',
-                    },
-                    limit: {
-                        type: 'integer',
-                        minimum: 1,
-                        maximum: 100,
-                        description: 'Number of items per page',
-                    },
-                    total: {
-                        type: 'integer',
-                        description: 'Total number of items',
-                    },
-                    pages: {
-                        type: 'integer',
-                        description: 'Total number of pages',
-                    },
-                    hasNext: {
-                        type: 'boolean',
-                        description: 'Whether there is a next page',
-                    },
-                    hasPrev: {
-                        type: 'boolean',
-                        description: 'Whether there is a previous page',
-                    },
-                },
-            },
         },
     },
-    security: [
-        {
-            bearerAuth: [],
-        },
-    ],
+    security: [],
     tags: [
         {
             name: 'Health',
             description: 'Health check and system status endpoints',
-        },
-        {
-            name: 'Authentication',
-            description: 'User authentication and authorization endpoints',
-        },
-        {
-            name: 'Users',
-            description: 'User management operations',
         },
         {
             name: 'Company',

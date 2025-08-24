@@ -3,6 +3,80 @@ import { ApiError, ApiResponse, asyncHandler } from '../utils';
 import { Request, Response } from 'express';
 import { industryEnum, IndustryType } from '../models/company.model';
 
+/**
+ * @swagger
+ * /companies:
+ *   post:
+ *     summary: Create a new company
+ *     tags: [Company]
+ *     description: Add a new company to the database with all required details.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the company.
+ *                 example: "Tech Corp"
+ *               description:
+ *                 type: string
+ *                 description: A brief description of the company.
+ *                 example: "A leading tech company specializing in AI."
+ *               industry:
+ *                 type: string
+ *                 description: The industry the company belongs to.
+ *                 example: "Technology"
+ *               foundedYear:
+ *                 type: integer
+ *                 description: The year the company was founded.
+ *                 example: 2010
+ *               location:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Locations where the company operates.
+ *                 example: ["New York", "San Francisco"]
+ *               website:
+ *                 type: string
+ *                 description: The company's website URL.
+ *                 example: "https://www.techcorp.com"
+ *               email:
+ *                 type: string
+ *                 description: The company's contact email.
+ *                 example: "info@techcorp.com"
+ *               phone:
+ *                 type: string
+ *                 description: The company's contact phone number.
+ *                 example: "+1-800-555-1234"
+ *               employees:
+ *                 type: integer
+ *                 description: The number of employees in the company.
+ *                 example: 500
+ *               logo:
+ *                 type: string
+ *                 description: URL of the company's logo.
+ *                 example: "https://www.techcorp.com/logo.png"
+ *               headquarters:
+ *                 type: string
+ *                 description: The headquarters of the company.
+ *                 example: "Silicon Valley"
+ *               revenue:
+ *                 type: number
+ *                 description: The company's annual revenue.
+ *                 example: 1000000
+ *     responses:
+ *       201:
+ *         description: Company created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Company'
+ *       400:
+ *         description: Missing or invalid fields.
+ */
 export const createCompany = asyncHandler(async (req: Request, res: Response) => {
     const {
         name,
@@ -82,6 +156,7 @@ export const createCompany = asyncHandler(async (req: Request, res: Response) =>
  * /companies:
  *   get:
  *     summary: Get all companies
+ *     tags: [Company]
  *     description: Fetch a paginated list of companies with selected fields.
  *     parameters:
  *       - in: query
@@ -139,6 +214,7 @@ export const getAllCompanies = async (req: Request, res: Response) => {
  * /companies/{id}:
  *   get:
  *     summary: Get a company by ID
+ *     tags: [Company]
  *     description: Fetch detailed information about a specific company by its ID.
  *     parameters:
  *       - in: path
@@ -180,6 +256,7 @@ export const getCompanyById = async (req: Request, res: Response) => {
  * /companies/{id}:
  *   patch:
  *     summary: Update a company
+ *     tags: [Company]
  *     description: Update specific fields of a company by its ID.
  *     parameters:
  *       - in: path
@@ -252,6 +329,7 @@ export const updateCompany = async (req: Request, res: Response) => {
  * /companies/{id}:
  *   delete:
  *     summary: Delete a company
+ *     tags: [Company]
  *     description: Remove a company from the database by its ID.
  *     parameters:
  *       - in: path
@@ -285,6 +363,7 @@ export const deleteCompany = async (req: Request, res: Response) => {
  * /companies/search/suggestions:
  *   get:
  *     summary: Get search suggestions
+ *     tags: [Company]
  *     description: Fetch unique suggestions for companies based on a query.
  *     parameters:
  *       - in: query
@@ -340,6 +419,7 @@ export const searchSuggestion = async (req: Request, res: Response) => {
  * /companies/search:
  *   get:
  *     summary: Search companies with filters
+ *     tags: [Company]
  *     description: Fetch companies based on various filters like name, location, industry, etc.
  *     parameters:
  *       - in: query

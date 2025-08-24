@@ -13,7 +13,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/health/status:
+ * /health/status:
  *   get:
  *     summary: Get detailed system status
  *     tags: [Health]
@@ -43,7 +43,7 @@ router.get(
 
 /**
  * @swagger
- * /api/v1/health/ping:
+ * /health/ping:
  *   get:
  *     summary: Simple ping endpoint
  *     tags: [Health]
