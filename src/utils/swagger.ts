@@ -99,7 +99,7 @@ const swaggerDefinition = {
         {
             url:
                 process.env.NODE_ENV === 'production'
-                    ? 'https://api.company.com/api/v1'
+                    ? 'https://company-data-managing.onrender.com/api/v1'
                     : `http://localhost:${process.env.PORT || 9090}/api/v1`,
             description:
                 process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server',
