@@ -221,7 +221,7 @@ const app: Express = express();
  * Enable this when running behind a reverse proxy (nginx, AWS ALB, etc.)
  * This allows Express to correctly identify client IP addresses and protocol.
  */
-app.set('trust proxy', process.env.NODE_ENV === 'production');
+// app.set('trust proxy', process.env.NODE_ENV === 'production');
 
 /**
  * Security Middleware Configuration
